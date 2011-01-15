@@ -1,4 +1,9 @@
-A Ruby string that behaves like 1.9 and runs on 1.8
+Stop thinking about differences between 1.9 and 1.8.
+
+size / index / slice / slice! / chars / bytes / [] etc supported
+
+Still some methods missing, fork & pull for what you need!
+
 
 Install
 =======
@@ -6,7 +11,8 @@ Install
 
 Usage
 =====
-    CODE_EXAMPLE
+    # on 1.8 AND 1.9
+    String19("Á§ÐÁ§Ð").size == 6
 
 Author
 ======
