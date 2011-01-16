@@ -119,6 +119,10 @@ describe String19 do
     end
   end
 
+  it "has bytesize" do
+    String19('áßð').bytesize.should == 6
+  end
+
   describe :respond_to? do
     it "is true for mapped methods" do
       String19('x').respond_to?(:valid_encoding?).should == true
@@ -126,6 +130,26 @@ describe String19 do
 
     it "is false for not mapped methods" do
       String19('x').respond_to?(:foo).should == false
+    end
+  end
+
+  describe :insert do
+    it "can insert at normal positions" do
+      result = String19("áßð").insert(1,'áßð')
+      result.should == 'ááßðßð'
+      result.size.should == 6
+    end
+
+    it "can insert to negative positions" do
+      result = String19("áßð").insert(-1,'áßð')
+      result.should == "áßðáßð"
+      result.size.should == 6
+    end
+
+    it "cannot insert outsize of string" do
+      lambda{
+        String19("áßð").insert(4,'áßð')
+      }.should raise_error
     end
   end
 

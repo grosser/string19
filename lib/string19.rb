@@ -62,6 +62,15 @@ if String19::IS_18
         String19(s[0...found]).size
       end
 
+      def insert(position, item)
+        if position.abs > size 
+          raise IndexError, "index #{position} out of string"
+        end
+
+        @chars.insert(position, *String19(item).chars.to_a)
+        self
+      end
+
       def self.wrap(*args)
         args.each do |method|
           eval("def #{method}(*args, &block); String19(@chars.#{method}(*args, &block)); end")
