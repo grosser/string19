@@ -23,11 +23,11 @@ if String19::IS_18
       end
 
       def bytesize
-        to_s18.size
+        to_s.size
       end
 
       def bytes
-        to_s18.bytes
+        to_s.bytes
       end
 
       def encoding
@@ -43,15 +43,11 @@ if String19::IS_18
       end
 
       def ==(other)
-        other = other.to_s18 if other.is_a?(String19::Wrapper)
-        other.is_a?(String) and to_s18 == other
+        other = other.to_s if other.is_a?(String19::Wrapper)
+        other.is_a?(String) and to_s == other
       end
 
       def to_s
-        self
-      end
-
-      def to_s18
         @chars.to_s
       end
 
@@ -60,8 +56,8 @@ if String19::IS_18
       end
 
       def index(what, offset=0)
-        s = to_s18
-        offset = self[0...offset].to_s18.size
+        s = to_s
+        offset = self[0...offset].to_s.size
         return unless found = s.index(what, offset)
         String19(s[0...found]).size
       end
@@ -78,7 +74,7 @@ if String19::IS_18
         end
       end
 
-      wrap *%w[dup slice slice! []]
+      wrap :dup, :slice, :slice!, :[], :inspect
       delegate :size
     end
   end

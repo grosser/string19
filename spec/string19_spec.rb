@@ -53,6 +53,19 @@ describe String19 do
     String19('äåé').should_not == ['äåé']
   end
 
+  describe :to_s do
+    it "returns a string19" do
+      pending 'making #{} work is top priority'
+      String19('äåé').to_s.size.should == 3
+    end
+
+    it "is the same" do
+      pending 'making #{} work is top priority'
+      a = String19('äåé')
+      a.to_s.object_id.should == a.object_id
+    end
+  end
+
   describe :index do
     it "has nil index" do
       String19("bb").index('a').should == nil
@@ -103,6 +116,22 @@ describe String19 do
 
     it "has correct bytes" do
       String19("ßä").bytes.to_a.should == [195, 159, 195, 164]
+    end
+  end
+
+  describe :respond_to? do
+    it "is true for mapped methods" do
+      String19('x').respond_to?(:valid_encoding?).should == true
+    end
+
+    it "is false for not mapped methods" do
+      String19('x').respond_to?(:foo).should == false
+    end
+  end
+
+  describe 'replacement' do
+    it "behaves like a string" do
+      "#{String19('xxx')}".should == "xxx"
     end
   end
 end
