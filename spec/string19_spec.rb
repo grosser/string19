@@ -168,6 +168,24 @@ describe String19 do
     end
   end
 
+  describe :gsub do
+    it "subs!" do
+      original = String19('áßð')
+      result = original.gsub!('ß','x')
+      result.should == 'áxð'
+      result.size.should == 3
+      original.should == 'áxð'
+    end
+
+    it "subs" do
+      original = String19('áßð')
+      result = original.gsub('ß','x')
+      result.should == 'áxð'
+      result.size.should == 3
+      original.should == 'áßð'
+    end
+  end
+
   describe 'replacement' do
     it "behaves like a string" do
       "#{String19('xxx')}".should == "xxx"

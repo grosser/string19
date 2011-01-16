@@ -67,6 +67,15 @@ if String19::IS_18
         self
       end
 
+      def gsub!(*args, &block)
+        @chars = to_s.send(:gsub!, *args, &block).scan(/./m)
+        self
+      end
+
+      def gsub(*args, &block)
+        dup.gsub!(*args, &block)
+      end
+
       def self.wrap(*args)
         args.each do |method|
           eval("def #{method}(*args, &block); String19(@chars.#{method}(*args, &block)); end")
