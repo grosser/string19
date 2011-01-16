@@ -66,13 +66,20 @@ if String19::IS_18
         String19(s[0...found]).size
       end
 
-      %w[slice slice! []].each do |wrapped|
-        eval("def #{wrapped}(*args, &block); String19(@chars.#{wrapped}(*args, &block)); end")
+      def self.wrap(*args)
+        args.each do |method|
+          eval("def #{method}(*args, &block); String19(@chars.#{method}(*args, &block)); end")
+        end
       end
 
-      %w[size].each do |delegated|
-        eval("def #{delegated}(*args, &block); @chars.#{delegated}(*args, &block); end")
+      def self.delegate(*args)
+        args.each do |method|
+          eval("def #{method}(*args, &block); @chars.#{method}(*args, &block); end")
+        end
       end
+
+      wrap *%w[dup slice slice! []]
+      delegate :size
     end
   end
 else

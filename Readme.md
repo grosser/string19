@@ -14,6 +14,27 @@ Usage
     # on 1.8 AND 1.9
     String19("Á§ÐÁ§Ð").size == 6
 
+    # to add a new wrapped method (result is a String19)
+    class String
+      def foo
+        'fäää'
+      end
+    end
+
+    String19::Wrapped.wrap(:foo) if String19::IS_19
+    String19('').foo.size == 4
+
+    # to add a new delegated method (result is not modified)
+    class String
+      def foo
+        42
+      end
+    end
+
+    String19::Wrapped.delegate(:foo) if String19::IS_19
+
+    String19('').foo == 42
+
 Author
 ======
 [Michael Grosser](http://grosser.it)  
