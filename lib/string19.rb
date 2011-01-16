@@ -74,7 +74,8 @@ if String19::IS_18
       end
 
       def gsub(*args, &block)
-        dup.gsub!(*args, &block)
+        copy = dup
+        copy.gsub!(*args, &block) || copy
       end
 
       def self.wrap(*args)
