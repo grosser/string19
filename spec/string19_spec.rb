@@ -206,4 +206,9 @@ describe String19 do
       "#{String19('xxx')}".should == "xxx"
     end
   end
+
+  it 'to_i' do
+    String19('1').to_i.should == 1
+    String19('').to_i.should == 0
+  end
 end

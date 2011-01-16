@@ -98,7 +98,7 @@ if String19::IS_18
 
       wrap :dup, :slice, :slice!, :[], :inspect
       delegate :size
-      delegate_to_s :match, :bytes
+      delegate_to_s :match, :bytes, :to_i
     end
   end
 else
