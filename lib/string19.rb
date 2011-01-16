@@ -68,7 +68,8 @@ if String19::IS_18
       end
 
       def gsub!(*args, &block)
-        @chars = to_s.send(:gsub!, *args, &block).scan(/./m)
+        return unless result = to_s.send(:gsub!, *args, &block)
+        @chars = result.scan(/./m)
         self
       end
 

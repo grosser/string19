@@ -169,20 +169,35 @@ describe String19 do
   end
 
   describe :gsub do
-    it "subs!" do
+    it "gsubs!" do
       original = String19('áßð')
       result = original.gsub!('ß','x')
       result.should == 'áxð'
       result.size.should == 3
       original.should == 'áxð'
+      result.object_id.should == original.object_id
     end
 
-    it "subs" do
+    it "gsubs" do
       original = String19('áßð')
       result = original.gsub('ß','x')
       result.should == 'áxð'
       result.size.should == 3
       original.should == 'áßð'
+      result.object_id.should_not == original.object_id
+    end
+
+    it "is nil when gsub! does not match" do
+      String19("x").gsub!('xxx','d').should == nil
+    end
+
+    it "is copy when gsub does not match" do
+      original = String19('áßð')
+      result = original.gsub('ßßßß','x')
+      result.should == 'áßð'
+      result.size.should == 3
+      original.should == 'áßð'
+      result.object_id.should_not == original.object_id
     end
   end
 
