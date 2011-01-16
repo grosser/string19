@@ -21,7 +21,7 @@ Usage
       end
     end
 
-    String19::Wrapped.wrap(:foo) if String19::IS_19
+    String19::Wrapped.wrap(:foo) unless String19::IS_19
     String19('').foo.size == 4
 
     # to add a new delegated method (result is not modified)
@@ -31,7 +31,7 @@ Usage
       end
     end
 
-    String19::Wrapped.delegate(:foo) if String19::IS_19
+    String19::Wrapped.delegate(:foo) unless String19::IS_19
 
     String19('').foo == 42
 
