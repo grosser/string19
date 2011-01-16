@@ -18,16 +18,12 @@ if String19::IS_18
         @chars = wrapped.scan(/./m)
       end
 
-      def chars
-        @chars.map{|c| String19(c) }.enum_for(:each)
-      end
-
       def bytesize
         to_s.size
       end
 
-      def bytes
-        to_s.bytes
+      def chars
+        @chars.map{|c| String19(c) }.enum_for(:each)
       end
 
       def encoding
@@ -83,8 +79,15 @@ if String19::IS_18
         end
       end
 
+      def self.delegate_to_s(*args)
+        args.each do |method|
+          eval("def #{method}(*args, &block); to_s.#{method}(*args, &block); end")
+        end
+      end
+
       wrap :dup, :slice, :slice!, :[], :inspect
       delegate :size
+      delegate_to_s :match, :bytes
     end
   end
 else

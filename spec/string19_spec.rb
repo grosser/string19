@@ -153,6 +153,21 @@ describe String19 do
     end
   end
 
+  describe :match do
+    it "matches" do
+      String19('áßð').match(/ß(ð)/).to_a.should == ['ßð','ð']
+    end
+
+    it "does not match" do
+      String19('áßð').match(/xß(ð)/).should == nil
+    end
+
+    it "returns String19" do
+      pending
+      String19('áßð').match(/ß(ð)/)[0].size.should == 2
+    end
+  end
+
   describe 'replacement' do
     it "behaves like a string" do
       "#{String19('xxx')}".should == "xxx"
